@@ -11,8 +11,21 @@ program
 
 program.parse(process.argv);
 const options = program.opts();
-const { host, port, cache } = options;
 
+if (!options.host) {
+  console.error('Missing required parameter: --host');
+  process.exit(1);
+}
+if (!options.port) {
+  console.error('Missing required parameter: --port');
+  process.exit(1);
+}
+if (!options.cache) {
+  console.error('Missing required parameter: --cache');
+  process.exit(1);
+}
+
+const { host, port, cache } = options;
 const cacheDir = path.resolve(cache);
 
 if (!fs.existsSync(cacheDir)) {
